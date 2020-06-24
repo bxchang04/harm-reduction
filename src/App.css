@@ -47,7 +47,11 @@
 }
 
 .profile-button {
-  margin-right: 20px 
+  margin-right: 20px;
+}
+
+.register-button {
+  float: right;
 }
 
 td {

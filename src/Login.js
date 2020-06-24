@@ -10,7 +10,7 @@ export default () => {
   return (
     <div className="fullscreen">
       <div className="login">
-        <h1>Harm Reduction</h1>
+        <h1>Harm Reduction - Login</h1>
         <LoginForm />
       </div>
     </div>
@@ -41,6 +41,12 @@ const LoginForm = () => {
       .finally(() => update({ isSigningIn: false }));
   };
 
+  let history = useHistory();
+
+  function handleClick() {
+    history.push("/register");
+  }
+
   return (
     <Form onSubmit={login} style={{ marginBottom: '20px' }}>
       <Form.Group controlId="email">
@@ -68,15 +74,19 @@ const LoginForm = () => {
         <Form.Control.Feedback type="invalid">
           {state.error.password}
         </Form.Control.Feedback>
+        <br />
+        <Button variant="primary" type="submit" disabled={state.isSigningIn}>
+          Log In<br />(existing users)
+        </Button>
+        <Button className='register-button' variant="primary" type="submit" disabled={state.isSigningIn} onClick="handleRegister">
+          Register<br />(first-time users)
+        </Button>
       </Form.Group>
       {state.error.other && (
         <div style={{ color: 'red', marginBottom: '10px' }}>
           {state.error.other}
         </div>
       )}
-      <Button variant="primary" type="submit" disabled={state.isSigningIn}>
-        Log In
-      </Button>
       {state.isSigningIn && (
         <Spinner
           as="span"
