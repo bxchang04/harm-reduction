@@ -4,6 +4,7 @@ import TopBar from './TopBar';
 import Content from './Content';
 import { useAuthState, AuthStatus } from './Auth';
 import Login from './Login';
+import PWReset from './PWReset';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Spinner from 'react-bootstrap/Spinner';
 
@@ -13,6 +14,9 @@ function App() {
       <Switch>
         <Route path="/login">
           <Login />
+        </Route>
+        <Route path="/pwReset">
+          <PWReset />
         </Route>
         <PrivateRoute path="/">
           <MainPage />
@@ -31,6 +35,7 @@ const MainPage = () => (
 
 function PrivateRoute({ children, ...rest }) {
   const { status } = useAuthState();
+  const pwReset = true;
   return (
     <Route
       {...rest}
@@ -38,11 +43,20 @@ function PrivateRoute({ children, ...rest }) {
         switch (status) {
           case AuthStatus.SignedIn:
             return children;
-          case AuthStatus.SignedOut:
+          case AuthStatus.SignedOut && !pwReset:
             return (
               <Redirect
                 to={{
-                  pathname: '/login',
+                  pathname: '/pwReset',
+                  state: { from: location },
+                }}
+              />
+            );
+          case AuthStatus.SignedOut && pwReset:
+            return (
+              <Redirect
+                to={{
+                  pathname: '/pwReset',
                   state: { from: location },
                 }}
               />

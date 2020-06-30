@@ -1,6 +1,6 @@
 import React, { useReducer, useEffect } from 'react';
 import { auth } from './Firebase';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation, NavLink } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
@@ -41,10 +41,16 @@ const LoginForm = () => {
       .finally(() => update({ isSigningIn: false }));
   };
 
-  let history = useHistory();
+  let history = useHistory(); // not needed any more
 
-  function handleClick() {
-    history.push("/register");
+  function handleRegister() {
+    // history.push("/pwreset");
+    // code to create new user here
+  }
+
+  function handlePWreset() {
+    history.push("/pwReset");
+    // code to create new user here
   }
 
   return (
@@ -78,29 +84,38 @@ const LoginForm = () => {
         <Button variant="primary" type="submit" disabled={state.isSigningIn}>
           Log In<br />(existing users)
         </Button>
-        <Button className='register-button' variant="primary" type="submit" disabled={state.isSigningIn} onClick="handleRegister">
+        <Button className='register-button' variant="primary" disabled={state.isSigningIn} onClick={handleRegister}>
           Register<br />(first-time users)
         </Button>
+        <br />
+        <br />
+        <NavLink disabled={state.isSigningIn} to="/pwReset" >
+          Forgot your password?
+        </NavLink>
       </Form.Group>
-      {state.error.other && (
-        <div style={{ color: 'red', marginBottom: '10px' }}>
-          {state.error.other}
-        </div>
-      )}
-      {state.isSigningIn && (
-        <Spinner
-          as="span"
-          animation="border"
-          size="sm"
-          role="status"
-          aria-hidden="true"
-          style={{
-            marginLeft: '10px',
-            alignSelf: 'center',
-          }}
-        />
-      )}
-    </Form>
+      {
+        state.error.other && (
+          <div style={{ color: 'red', marginBottom: '10px' }}>
+            {state.error.other}
+          </div>
+        )
+      }
+      {
+        state.isSigningIn && (
+          <Spinner
+            as="span"
+            animation="border"
+            size="sm"
+            role="status"
+            aria-hidden="true"
+            style={{
+              marginLeft: '10px',
+              alignSelf: 'center',
+            }}
+          />
+        )
+      }
+    </Form >
   );
 };
 

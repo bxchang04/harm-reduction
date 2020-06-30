@@ -14,7 +14,6 @@ export default () => {
     history.push("/profile");
   }
 
-
   return (
     <Container fluid className="top-bar">
       <Row style={{ alignItems: 'center' }}>
@@ -23,7 +22,7 @@ export default () => {
         <Item to="/incidents" label="Incidents" />
         <Item to="/engagements" label="Engagements" />
         <div style={{ flexGrow: 1 }} />
-        <Button className="profile-button" variant="dark" label="Profile" onClick={handleClick} > {/* changing font color to dark doesn't work here for some reason, so I changed the button from light themed to dark themed for now */}
+        <Button className="profile-button" variant="dark" label="Profile" onClick={handleClick} >
           Profile
         </Button>
         <Button variant="light" onClick={() => auth.signOut()}>
