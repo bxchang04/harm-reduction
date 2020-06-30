@@ -4,7 +4,7 @@ import TopBar from './TopBar';
 import Content from './Content';
 import { useAuthState, AuthStatus } from './Auth';
 import Login from './Login';
-import PWReset from './PWReset';
+import PWReset from './ResetPassword';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Spinner from 'react-bootstrap/Spinner';
 
