@@ -15,7 +15,7 @@ function App() {
         <Route path="/login">
           <Login />
         </Route>
-        <Route path="/pwReset">
+        <Route path="/login/pwReset">
           <PWReset />
         </Route>
         <PrivateRoute path="/">
@@ -33,9 +33,12 @@ const MainPage = () => (
   </div>
 );
 
+// tried this links structure vs using nested switch statements for better readability, but it led to an infinite loop for some reason: https://stackoverflow.com/questions/38370979/nested-switch-statement-in-javascript
+// ...so I reverted back to using nested switch statements.
+
 function PrivateRoute({ children, ...rest }) {
   const { status } = useAuthState();
-  const pwReset = true;
+  const pwReset = false; // for testing. Needs to be dynamic.
   return (
     <Route
       {...rest}
@@ -43,24 +46,37 @@ function PrivateRoute({ children, ...rest }) {
         switch (status) {
           case AuthStatus.SignedIn:
             return children;
-          case AuthStatus.SignedOut && !pwReset:
+          case AuthStatus.SignedOut:
             return (
               <Redirect
                 to={{
-                  pathname: '/pwReset',
+                  pathname: '/login',
                   state: { from: location },
                 }}
               />
             );
-          case AuthStatus.SignedOut && pwReset:
-            return (
-              <Redirect
-                to={{
-                  pathname: '/pwReset',
-                  state: { from: location },
-                }}
-              />
-            );
+          case AuthStatus.SignedOut: {
+            switch (pwReset) {
+              case !pwReset:
+                return (
+                  <Redirect
+                    to={{
+                      pathname: '/login',
+                      state: { from: location },
+                    }}
+                  />
+                );
+              case pwReset:
+                return (
+                  <Redirect
+                    to={{
+                      pathname: '/login/pwReset',
+                      state: { from: location },
+                    }}
+                  />
+                );
+            }
+          }
           case AuthStatus.Loading:
             return (
               <div className="fullscreen">

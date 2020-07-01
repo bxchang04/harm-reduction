@@ -49,7 +49,7 @@ const LoginForm = () => {
   }
 
   function handlePWreset() {
-    history.push("/pwReset");
+    history.push("/login/pwReset");
     // code to create new user here
   }
 
@@ -89,9 +89,9 @@ const LoginForm = () => {
         </Button>
         <br />
         <br />
-        <NavLink disabled={state.isSigningIn} to="/pwReset" >
+        <a disabled={state.isSigningIn} href="" onClick={handlePWreset} >
           Forgot your password?
-        </NavLink>
+        </a>
       </Form.Group>
       {
         state.error.other && (

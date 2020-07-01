@@ -18,18 +18,18 @@ export default () => {
 };
 
 const PWReset = () => {
-  // useSignInRedirect();
+  useSignInRedirect();
 
-  /*   const [state, update] = useReducer(
-      (state, update) => ({ ...state, ...update }),
-      {
-        email: '',
-        password: '',
-        isSigningIn: false,
-        error: {},
-      }
-    );
-  */
+  const [state, update] = useReducer(
+    (state, update) => ({ ...state, ...update }),
+    {
+      email: '',
+      password: '',
+      isSigningIn: false,
+      error: {},
+    }
+  );
+
   const resetPassword = event => {
     event.preventDefault();
     event.stopPropagation();
@@ -87,7 +87,7 @@ const PWReset = () => {
 */
 
 /** Replaces the current page with the target page after successful login. */
-/* const useSignInRedirect = () => {
+const useSignInRedirect = () => {
   const history = useHistory();
   const location = useLocation();
   const { user: currentUser } = useAuthState();
@@ -99,4 +99,3 @@ const PWReset = () => {
     }
   }, [currentUser, history, location.state]);
 };
- */
