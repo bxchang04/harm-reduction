@@ -89,7 +89,8 @@ const LoginForm = () => {
         </Button>
         <br />
         <br />
-        <a disabled={state.isSigningIn} href="" onClick={handleResetPassword} >
+        {/* Tried "" for href and it worked. But now it gives a warning. Would href="/resetPassword" be better? */}
+        <a disabled={state.isSigningIn} href="/resetPassword" onClick={handleResetPassword} >
           Forgot your password?
         </a>
       </Form.Group>

@@ -4,7 +4,6 @@ import TopBar from './TopBar';
 import Content from './Content';
 import { useAuthState, AuthStatus } from './Auth';
 import Login from './Login';
-import ResetPassword from './ResetPassword';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Spinner from 'react-bootstrap/Spinner';
 
@@ -15,8 +14,9 @@ function App() {
         <Route path="/login">
           <Login />
         </Route>
+        {/* Is this route needed? */}
         <Route path="/resetPassword">
-          <ResetPassword />
+          <Login />
         </Route>
         <PrivateRoute path="/">
           <MainPage />
