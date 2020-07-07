@@ -4,14 +4,13 @@ import Row from 'react-bootstrap/Row';
 import { NavLink, useHistory } from 'react-router-dom';
 import './App.css';
 import Button from 'react-bootstrap/Button';
-import { auth } from './Firebase';
+import { auth } from './API';
 
 export default () => {
-
   let history = useHistory();
 
   function handleClick() {
-    history.push("/profile");
+    history.push('/profile');
   }
 
   return (
@@ -22,14 +21,19 @@ export default () => {
         <Item to="/incidents" label="Incidents" />
         <Item to="/engagements" label="Engagements" />
         <div style={{ flexGrow: 1 }} />
-        <Button className="profile-button" variant="dark" label="Profile" onClick={handleClick} >
+        <Button
+          className="profile-button"
+          variant="dark"
+          label="Profile"
+          onClick={handleClick}
+        >
           Profile
         </Button>
         <Button variant="light" onClick={() => auth.signOut()}>
           Log Out
         </Button>
       </Row>
-    </Container >
+    </Container>
   );
 };
 

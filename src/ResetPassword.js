@@ -37,7 +37,7 @@ const ResetPassword = () => {
     // code here to send reset email
   };
 
-  let history = useHistory(); // not needed any more
+  let history = useHistory();
 
   function handleBack() {
     history.push("/login");
@@ -51,8 +51,6 @@ const ResetPassword = () => {
           type="text"
         />
       </Form.Group>
-      {
-      }
       <Button className='resetPassword-button' variant="primary" type="submit" >
         Reset Password
       </Button>
@@ -60,40 +58,9 @@ const ResetPassword = () => {
       <Button className='back-button' variant="primary" onClick={handleBack}>
         Go Back
       </Button>
-      {/*       {
-        state.isSigningIn && (
-          <Spinner
-            as="span"
-            animation="border"
-            size="sm"
-            role="status"
-            aria-hidden="true"
-            style={{
-              marginLeft: '10px',
-              alignSelf: 'center',
-            }}
-          />
-        )
-      } */}
     </Form >
   );
 };
-
-/* const getErrorMessage = code => {
-  switch (code) {
-    case 'auth/invalid-email':
-      return { email: 'Invalid email' };
-    case 'auth/user-disabled':
-      return { email: 'User is disabled' };
-    case 'auth/user-not-found':
-      return { email: 'User not found' };
-    case 'auth/wrong-password':
-      return { password: 'Wrong password' };
-    default:
-      return { other: 'Something went wrong. Please try again later.' };
-  }
-};
-*/
 
 /** Replaces the current page with the target page after successful login. */
 const useSignInRedirect = () => {
