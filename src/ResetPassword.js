@@ -9,15 +9,15 @@ import { useAuthState } from './Auth';
 export default () => {
   return (
     <div className="fullscreen">
-      <div className="pwReset">
+      <div className="resetPassword">
         <h1>Harm Reduction - Reset Password</h1>
-        <PWReset />
+        <ResetPassword />
       </div>
     </div>
   );
 };
 
-const PWReset = () => {
+const ResetPassword = () => {
   useSignInRedirect();
 
   const [state, update] = useReducer(
@@ -37,19 +37,28 @@ const PWReset = () => {
     // code here to send reset email
   };
 
+  let history = useHistory(); // not needed any more
+
+  function handleBack() {
+    history.push("/login");
+  }
+
   return (
     <Form onSubmit={resetPassword} style={{ marginBottom: '20px' }}>
       <Form.Group controlId="email">
-        <Form.Label>Email</Form.Label>
+        <Form.Label>Email to send password reset link:</Form.Label>
         <Form.Control
-          required
           type="text"
         />
       </Form.Group>
       {
       }
-      <Button className='pwReset-button' variant="primary" type="submit" >
+      <Button className='resetPassword-button' variant="primary" type="submit" >
         Reset Password
+      </Button>
+      <br /> <br />
+      <Button className='back-button' variant="primary" onClick={handleBack}>
+        Go Back
       </Button>
       {/*       {
         state.isSigningIn && (

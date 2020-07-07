@@ -1,6 +1,6 @@
 import React, { useReducer, useEffect } from 'react';
 import { auth } from './Firebase';
-import { useHistory, useLocation, NavLink } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
@@ -44,19 +44,19 @@ const LoginForm = () => {
   let history = useHistory(); // not needed any more
 
   function handleRegister() {
-    // history.push("/pwreset");
+    // history.push("/resetPassword");
     // code to create new user here
   }
 
-  function handlePWreset() {
-    history.push("/login/pwReset");
+  function handleResetPassword() {
+    history.push("/resetPassword");
     // code to create new user here
   }
 
   return (
     <Form onSubmit={login} style={{ marginBottom: '20px' }}>
       <Form.Group controlId="email">
-        <Form.Label>Email</Form.Label>
+        <Form.Label>Email:</Form.Label>
         <Form.Control
           required
           value={state.email}
@@ -69,7 +69,7 @@ const LoginForm = () => {
         </Form.Control.Feedback>
       </Form.Group>
       <Form.Group controlId="password">
-        <Form.Label>Password</Form.Label>
+        <Form.Label>Password:</Form.Label>
         <Form.Control
           required
           value={state.password}
@@ -89,7 +89,7 @@ const LoginForm = () => {
         </Button>
         <br />
         <br />
-        <a disabled={state.isSigningIn} href="" onClick={handlePWreset} >
+        <a disabled={state.isSigningIn} href="" onClick={handleResetPassword} >
           Forgot your password?
         </a>
       </Form.Group>

@@ -4,7 +4,7 @@ import TopBar from './TopBar';
 import Content from './Content';
 import { useAuthState, AuthStatus } from './Auth';
 import Login from './Login';
-import PWReset from './ResetPassword';
+import ResetPassword from './ResetPassword';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Spinner from 'react-bootstrap/Spinner';
 
@@ -15,8 +15,8 @@ function App() {
         <Route path="/login">
           <Login />
         </Route>
-        <Route path="/login/pwReset">
-          <PWReset />
+        <Route path="/resetPassword">
+          <ResetPassword />
         </Route>
         <PrivateRoute path="/">
           <MainPage />
@@ -38,7 +38,7 @@ const MainPage = () => (
 
 function PrivateRoute({ children, ...rest }) {
   const { status } = useAuthState();
-  const pwReset = false; // for testing. Needs to be dynamic.
+  const resetPassword = false; // for testing. Needs to be dynamic.
   return (
     <Route
       {...rest}
@@ -56,8 +56,8 @@ function PrivateRoute({ children, ...rest }) {
               />
             );
           case AuthStatus.SignedOut: {
-            switch (pwReset) {
-              case !pwReset:
+            switch (resetPassword) {
+              case !resetPassword:
                 return (
                   <Redirect
                     to={{
@@ -66,11 +66,11 @@ function PrivateRoute({ children, ...rest }) {
                     }}
                   />
                 );
-              case pwReset:
+              case resetPassword:
                 return (
                   <Redirect
                     to={{
-                      pathname: '/login/pwReset',
+                      pathname: '/resetPassword',
                       state: { from: location },
                     }}
                   />
