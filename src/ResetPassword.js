@@ -51,8 +51,6 @@ const ResetPassword = () => {
           type="text"
         />
       </Form.Group>
-      {
-      }
       <Button className='resetPassword-button' variant="primary" type="submit" >
         Reset Password
       </Button>
