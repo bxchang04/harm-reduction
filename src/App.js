@@ -33,12 +33,8 @@ const MainPage = () => (
   </div>
 );
 
-// tried this links structure vs using nested switch statements for better readability, but it led to an infinite loop for some reason: https://stackoverflow.com/questions/38370979/nested-switch-statement-in-javascript
-// ...so I reverted back to using nested switch statements.
-
 function PrivateRoute({ children, ...rest }) {
   const { status } = useAuthState();
-  const resetPassword = false; // for testing. Needs to be dynamic.
   return (
     <Route
       {...rest}
@@ -55,28 +51,6 @@ function PrivateRoute({ children, ...rest }) {
                 }}
               />
             );
-          case AuthStatus.SignedOut: {
-            switch (resetPassword) {
-              case !resetPassword:
-                return (
-                  <Redirect
-                    to={{
-                      pathname: '/login',
-                      state: { from: location },
-                    }}
-                  />
-                );
-              case resetPassword:
-                return (
-                  <Redirect
-                    to={{
-                      pathname: '/resetPassword',
-                      state: { from: location },
-                    }}
-                  />
-                );
-            }
-          }
           case AuthStatus.Loading:
             return (
               <div className="fullscreen">
