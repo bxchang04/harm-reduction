@@ -33,11 +33,8 @@ const MainPage = () => (
   </div>
 );
 
-// broken
-
 function PrivateRoute({ children, ...rest }) {
   const { status } = useAuthState();
-  const resetPassword = false; // for testing. Needs to be dynamic.
   return (
     <Route
       {...rest}
